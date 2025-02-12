@@ -9,7 +9,7 @@ How to create a virtual machine to used Azure Platform for Linux Management Cour
 
 
 ![Azure View after login ] 
-![alt text](<Screenshot 2025-01-20 220903.png>)
+![alt text](Pictures/Screenshot%202025-01-20%20220903.png)
 
 - Step 2: I created a new resource group  and new virtual machine in Azure portal.
 
@@ -36,7 +36,7 @@ After creating the virtual machine, I go to lab-robotics-ip and select setting(C
 
 - Step 12: I open the terminal and paste the URL given in SSH to VM with specified private key.
 
-![Successfully done in Terminal ]!![alt text](<Screenshot (12).png>)
+![Successfully done in Terminal ]!![alt text](Pictures/Screenshot%20(12).png)
 
 
 
@@ -116,7 +116,7 @@ Check directory permissions:
 ```
 
 ## Output
-![alt text](<Screenshot (13).png>)
+![alt text](Pictures/Screenshot%20(13).png)
 
 
 
@@ -145,7 +145,7 @@ Run the following command to display the installed APT version:
 ```bash
 apt --version
 ```
-![alt text](<Screenshot 2025-02-12 220928.png>)
+![alt text](Pictures/Screenshot%202025-02-12%20220928.png)
 
 ### 2. Update the package list
 ```bash
@@ -170,7 +170,7 @@ sudo apt upgrade -y
 ``` bash
 sudo apt list --upgradable
 ```
-![alt text](<Screenshot 2025-02-12 223013.png>)
+![alt text](Pictures/Screenshot%202025-02-12%20223013.png)
 
 ## Part 2: Installing & Managing Packages
 ``` bash
@@ -182,7 +182,7 @@ apt search image editor
 ``` bash
 apt show zim
 ```
-![alt text](<Screenshot 2025-02-12 223545.png>)
+![alt text](Pictures/Screenshot%202025-02-12%20223545.png)
 
 ### 7. Install a package
 ``` bash
@@ -192,14 +192,14 @@ sudo apt install zim -y
 ``` bash 
  apt list --installed | grep zim
 ```
-![alt text](<Screenshot 2025-02-12 224503.png>)
+![alt text](Pictures/Screenshot%202025-02-12%20224503.png)
 
 ## Part 3: Removing & Cleaning Packages
 ### 9. Uninstall the package
 ``` bash
 sudo apt remove zim -y
 ``` 
-![alt text](<Screenshot 2025-02-12 224903.png>)
+![alt text](Pictures/Screenshot%202025-02-12%20224903.png)
 
 ###Is the package fully removed?
 
@@ -236,13 +236,13 @@ sudo apt clean
 ``` bash 
 sudo cat /etc/apt/sources.list
 ```
-![alt text](<Screenshot 2025-02-12 230156.png>)
+![alt text](Pictures/Screenshot%202025-02-12%20230156.png)
 
 - Then i use this
 ``` bash
 sudo cat /etc/apt/sources.list.d/ubuntu.sources
 ```
-![alt text](<Screenshot 2025-02-12 230430.png>)
+![alt text](Pictures/Screenshot%202025-02-12%20230430.png)
 
 ### 14. Add a new repository
 ``` bash
@@ -260,7 +260,7 @@ sudo apt install fakepackage
 ### What error message do you get?
 - I got:  E: Unable to locate package fakepackage
 
-![alt text](<Screenshot 2025-02-12 230835-1.png>)
+![alt text](Pictures/Screenshot%202025-02-12%20230835.png)
 
 ### How would you troubleshoot this issue?
 - Check if the package name is correct.
@@ -274,13 +274,13 @@ sudo apt install fakepackage
 ``` bash 
 sudo apt-mark hold tweak
 ```
-![alt text](<Screenshot 2025-02-12 231212.png>)
+![alt text](Pictures/Screenshot%202025-02-12%20231212.png)
 
 ### 2. Use apt-mark to unhold a package
 ``` bash 
 sudo apt-mark unhold tweak
 ```
-![alt text](<Screenshot 2025-02-12 231406.png>)
+![alt text](Pictures/Screenshot%202025-02-12%20231406.png)
 
 ### Why would you want to hold a package?
 - Holding a package prevents it from being automatically updated. This is useful when you want to keep a specific version of a package for compatibility or stability reasons.
