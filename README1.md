@@ -284,3 +284,116 @@ sudo apt-mark unhold tweak
 
 ### Why would you want to hold a package?
 - Holding a package prevents it from being automatically updated. This is useful when you want to keep a specific version of a package for compatibility or stability reasons.
+
+
+# Assignment 7: Linux Virtualization
+
+###  18.02.2025   Biswash Pokhrel  (amk1004574@student.hamk.fi)
+
+## Part 1: Virtualization Concepts
+
+Virtualization: A technique that allows the creation of virtual versions of physical resources like hardware, storage, and networks.
+
+Hypervisor: A specialized software that enables the creation and management of virtual machines (VMs). Some common examples are KVM, VMware, and Hyper-V.
+
+Virtual Machines (VMs): Fully independent emulations of physical computers, each running its own operating system.
+
+Containers: Lightweight, self-contained environments that operate independently while sharing the host system's OS kernel. They include their own file systems and libraries.
+
+## VMs vs Containers
+
+- The difference between VMs and Containers in terms of Architecture, Resource Utilization and Isolation
+
+| **Aspect**    | **VMs**                                          | **Containers**    |
+|----------------------|------------------------------------------------|------------------------------|
+| **Architecture**     | Requires a full OS for each instance            | Shares the host OS kernel      |
+| **Resource Utilization** | Requires more resources                        | More lightweight and efficient   |
+| **Isolation**        | Provides strong isolation since each VM has its own OS | Provides a lower level of isolation, as it shares the host OS kernel |
+
+## Part 2: Multipass Implementation
+### Install Multipass
+```bash
+sudo snap install multipass
+```
+![alt text](<Pictures/Screenshot 2025-02-23 112016.png>)
+
+### Launch an instance
+```bash
+
+multipass launch --name biswash-vm
+```
+![alt text](<Pictures/Screenshot 2025-02-23 112448.png>)
+
+### List all running instances
+```bash
+ multipass list
+```
+![alt text](<Pictures/Screenshot 2025-02-23 112641.png>)
+
+### View details about an instance
+```bash
+multipass info biswash-vm
+```
+![alt text](<Pictures/Screenshot 2025-02-23 112830.png>)
+
+### Access the shell of a running instance
+```bash
+multipass shell biswash-vm
+```
+![alt text](<Pictures/Screenshot 2025-02-23 113049.png>)
+
+### Stop, delete and purge an instance
+```bash
+multipass stop biswash-vm
+multipass delete biswash-vm
+multipass purge
+```
+![alt text](<Pictures/Screenshot 2025-02-23 114044.png>)
+
+## Learn About Cloud-Init Configuration
+### Create a cloud-init.yaml file to customize an instance.
+
+```bash
+nano cloud-init.yaml
+``` 
+### Launch an instance with cloud-init
+```bash
+ multipass launch --name biswash-vm --cloud-init cloud-init.yaml
+```
+![alt text](<Pictures/Screenshot 2025-02-23 114946.png>)
+### Create a new folder and Mount the folder inside a VM:
+```bash
+mkdir ~/multipass_shared
+multipass mount ~/multipass_shared biswash-vm:/mnt/shared
+```
+![alt text](<Pictures/Screenshot 2025-02-23 115330.png>)
+
+### create a txt file inside multipass folder to share it in VM because without creating a file I can't mount the folder.
+
+```bash
+echo "Hello, World!" > ~/multipass_shared/testfile.txt
+```
+![alt text](<Pictures/Screenshot 2025-02-23 115531.png>)
+### Check the mounted folder inside the VM:
+
+```bash 
+multipass shell biswash-vm
+ls /mnt/shared
+```
+![alt text](<Pictures/Screenshot 2025-02-23 115756.png>)
+
+## Part 3: LXD Implementation
+
+### Installation
+```bash 
+sudo apt update
+sudo snap install lxd
+```
+![alt text](<Pictures/Screenshot 2025-02-23 120441.png>)
+
+## Basic LXD command
+### Create a new container ans list it
+```bash
+lxc launch ubuntu:24.04 biswash-container
+lxc list
+```
