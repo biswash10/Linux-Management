@@ -397,3 +397,145 @@ sudo snap install lxd
 lxc launch ubuntu:24.04 biswash-container
 lxc list
 ```
+![alt text](<Pictures/Screenshot 2025-02-24 221538.png>)
+
+### Start and stop the container
+```bash
+lxc start biswash-container
+lxc stop biswash-container
+```
+![alt text](<Pictures/Screenshot 2025-02-24 221857.png>)
+
+### Delete the container
+```bash
+lxc delete biswash-container
+```
+![alt text](<Pictures/Screenshot 2025-02-24 222151.png>)
+
+## Part 4: Docker
+### Installation
+```bash
+# Install Docker Engine
+sudo apt update
+sudo apt install docker.io
+
+# Start and enable Docker
+sudo systemctl start docker
+sudo systemctl enable docker
+```
+
+### Verify the installation
+```bash
+docker --version
+```
+![alt text](<Pictures/Screenshot 2025-02-24 223244.png>)
+
+### Basic Docker Commands
+```bash
+# Pull image
+docker pull ubuntu:latest
+
+# Run container
+docker run -it ubuntu:latest
+
+# List containers
+docker ps
+
+# Build from Dockerfile
+docker build -t myapp .
+
+# Stop container
+docker stop container_id
+```
+![alt text](<Pictures/Screenshot 2025-02-26 184833.png>)
+
+## Part 5: Snap Implementation
+What are snaps?
+
+
+Snaps are universal, containerized software packages that include all dependencies needed to run an application. They work across multiple Linux distributions without requiring separate packaging for each one.
+
+
+
+What is Snapcraft?
+
+Snapcraft is a tool developed by Canonical for building, packaging, and publishing Snap applications. It simplifies the process of creating Snaps, ensuring they work across multiple Linux distributions without dependency conflicts.
+
+## Install Snapcraft
+First, install snapcraft
+```bash
+sudo apt update
+sudo apt install snapcraft -y
+```
+If you're on a non-Ubuntu system, you may need to install Snapcraft via Snap:
+```bash
+sudo snap install snapcraft --classic
+```
+### Verify Snapcraft installation
+```bash
+snapcraft --version
+```
+![alt text](<Pictures/Screenshot 2025-02-26 185906.png>)
+
+### Create a directory for Snap project
+```bash
+    mkdir my-snapcraft
+    cd my-snapcraft
+```
+### Create a simple Application Script
+We'll make a simple bash script that prints "Hello, Snap!".
+```bash
+mkdir bin
+nano bin/hello-snap
+```
+Add the following code to the file:
+```bash
+#!/bin/bash
+echo "Hello, Snap!"
+```
+### Create a Snapcraft Configuration File
+Initialize snapcraft
+```bash
+snapcraft init
+```
+Edit the snapcraft.yaml file
+```bash
+nano snapcraft.yaml
+```
+Add the following content to the file:
+```bash
+name: my-snapcraft
+base: core22
+version: "1.0"
+summary: "A simple Snapcraft app"
+description: "This is a simple Snap application that prints Hello, Snap!"
+
+grade: stable
+confinement: strict
+
+apps:
+  hello:
+    command: bin/hello-snap
+
+parts:
+  hello:
+    plugin: dump
+    source: .
+```
+![alt text](<Pictures/Screenshot 2025-02-26 190456.png>)
+
+### Build the Snap
+<<<<<<< HEAD
+```bash
+snapcraft
+```
+### Install the Snap:
+```bash
+sudo snap install my-snapcraft_1.0_amd64.snap --dangerous
+```
+The --dangerous flag is needed because it's not for the offical Snap store.
+
+Run the Snap:
+```bash
+my-snapcraft.hello
+```
